@@ -1,0 +1,47 @@
+<ion-view title="{{ day.name }}">
+  <ion-nav-buttons side="left">
+    <a ng-click="route('days')" class="nav-icon">
+      <i class="ion ion-ios-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <a ng-click="route('lesson', {day: day.id})" class="nav-icon">
+      <i class="ion ion-ios-plus-outline"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content on-scroll="scroll()">
+    <h1 ng-style="titleSize" class="page-title">{{ day.name }}</h1>
+    <div class="text-center" ng-if="!day.lessons.length">
+      {{ trans("messages.no_activities") }}
+    </div>
+    <div class="list">
+      <div ng-repeat="lesson in day.lessons track by lesson.id">
+        <div class="item row lesson" ng-class="{'item-active': lesson.active}">
+          <div class="col col-20" ng-click="route('lesson', {day: day.id, id: lesson.id})">
+            <i class="ion" ng-class="{
+            'ion-ios-videocam-outline': lesson.type === 'lecture',
+            'ion-ios-flask-outline': lesson.type === 'laboratories',
+            'ion-ios-calculator-outline': lesson.type === 'exercises'
+          }"></i>
+          </div>
+          <div class="col-70" ng-click="route('lesson', {day: day.id, id: lesson.id})">
+            <p class="item-title" ng-class="{
+              'lecture': lesson.type === 'lecture',
+              'laboratories': lesson.type === 'laboratories',
+              'exercises': lesson.type === 'exercises'
+            }">{{ lesson.name }}</p>
+            <p>{{ lesson.leader }}</p>
+            <p>{{ lesson.room }} {{ lesson.institute }}</p>
+            <p>{{ prettyHour(lesson.start) }} - {{ prettyHour(lesson.end) }}</p>
+          </div>
+          <div class="col col-10 remove-block" ng-click="deleteLesson(lesson)">
+            <i class="ion ion-ios-trash-outline"></i>
+          </div>
+        </div>
+        <div ng-if="lesson.active" class="item row progress-bar item-active">
+          <div class="progress-status" style="width:{{ lesson.progress | number:2 }}%"></div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

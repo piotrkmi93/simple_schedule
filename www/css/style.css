@@ -1,1 +1,160 @@
 /* Empty. Add your own CSS if you like */
+
+@font-face {
+  font-family: work-sans;
+  src: url('../fonts/wsel.ttf');
+}
+
+@font-face {
+  font-family: work-sans-bold;
+  src: url('../fonts/wsb.ttf');
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: work-sans-bold;
+}
+
+h1.page-title{
+  padding: 7px 0 0 7px;
+}
+
+.item .item-title{
+  font-family: work-sans-bold;
+  font-size: 20px;
+}
+
+.item{
+  border-right:none;
+}
+
+.item.lesson .item-title{
+  font-size: 16px;
+}
+
+.item.item-active{
+  /*background-color: #E3E3E3;*/
+  background-color: #CFD8DC;
+}
+
+.button{
+  font-family: work-sans-bold;
+  font-size: 20px;
+}
+
+.bar.bar-header{
+  transition: .5s ease all;
+}
+
+.bar.bar-custom{
+  border: none;
+  background: #ffffff;
+}
+
+a.nav-icon{
+  font-size: 33px;
+  margin-left: 7px;
+  width: 33px;
+  height: 33px;
+  color: #387ef5;
+}
+
+a.nav-icon.not-clickable{
+  color: #ef473a;
+}
+
+a.nav-icon.clickable{
+  color: #33cd5f;
+}
+
+.item.item-plus{
+  font-size: 52px;
+  padding: 0;
+  font-family: work-sans-bold;
+}
+
+.lesson i {
+  font-size: 40px;
+}
+
+.lesson .col.col-20,
+.lesson .col.col-10{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-block{
+  justify-content: flex-end;
+  color: #ef473a;
+}
+
+.col-70{
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 70%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 70%;
+  -ms-flex: 0 0 70%;
+  flex: 0 0 70%;
+  max-width: 70%;
+}
+
+.lecture,
+.ion-ios-videocam-outline{
+  color: #11c1f3 !important;
+}
+
+.laboratories,
+.ion-ios-flask-outline{
+  color: #886aea !important;
+}
+
+.exercises,
+.ion-ios-calculator-outline{
+  color: #FF9800 !important;
+}
+
+.credits{
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 70vh;
+}
+
+.progress-bar{
+  padding: 0;
+  border-top: none;
+}
+
+.progress-bar .progress-status{
+  height: 4px;
+  background-color: #33cd5f;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.day-circle-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-circle{
+  border: 3px solid #11c1f3;
+  color: #11c1f3;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 5px 0;
+  font-weight: bold;
+}
+
+.list > .item.row:nth-of-type(6) .day-circle,
+.list > .item.row:nth-of-type(7) .day-circle{
+  border: 3px solid #FF9800;
+  color: #FF9800;
+}
+
+.green{
+  color: #33cd5f !important;
+}

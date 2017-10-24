@@ -1,0 +1,23 @@
+<ion-view title="{{ trans('navigation.days') }}">
+  <ion-nav-buttons side="right">
+    <a ng-click="route('config')" class="nav-icon">
+      <i class="ion ion-ios-gear"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content on-scroll="scroll()">
+    <h1 ng-style="titleSize" class="page-title">{{ trans("navigation.days") }}</h1>
+    <div class="list">
+      <div ng-click="route('day', {day: day.id})" class="item row" ng-class="{'item-active': day.active}" ng-repeat="day in days">
+        <div class="col col-20 day-circle-container">
+          <div class="day-circle">
+            {{ day.name.slice(0,2) }}
+          </div>
+        </div>
+        <div class="col col-80">
+          <p class="item-title">{{ day.name }}</p>
+          <p ng-class="{'green': day.hours_from_to}">{{ day.hours_from_to || trans("messages.no_activities") }}</p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

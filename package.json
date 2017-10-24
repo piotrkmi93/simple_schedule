@@ -1,11 +1,19 @@
 {
-  "name": "simple_schedule",
-  "version": "0.0.1",
-  "description": "An Ionic project",
-  "devDependencies": {
-    "gulp": "^3.5.6",
-    "gulp-clean-css": "^3.7.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-sass": "^3.1.0"
-  }
+    "name": "simple_schedule",
+    "version": "0.0.1",
+    "description": "An Ionic project",
+    "devDependencies": {
+        "gulp": "^3.5.6",
+        "gulp-clean-css": "^3.7.0",
+        "gulp-rename": "^1.2.0",
+        "gulp-sass": "^3.1.0"
+    },
+    "dependencies": {
+        "de.appplant.cordova.plugin.local-notification": "^0.8.5"
+    },
+    "cordova": {
+        "plugins": {
+            "de.appplant.cordova.plugin.local-notification": {}
+        }
+    }
 }

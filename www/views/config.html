@@ -1,0 +1,34 @@
+<ion-view title="{{ trans('navigation.config') }}">
+  <ion-nav-buttons side="left">
+    <a ng-click="route('days')" class="nav-icon">
+      <i class="ion ion-ios-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content on-scroll="scroll()">
+    <h1 ng-style="titleSize" class="page-title">{{ trans("navigation.config") }}</h1>
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          {{ trans("config.labels.locale") }}
+        </div>
+        <select ng-options="trans('config.locales.'+l) for l in locales" ng-model="config.locale"></select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          {{ trans("config.labels.notifications") }}
+        </div>
+        <select ng-model="config.notification_delay">
+          <option ng-repeat="nd in notificationDelays" value="{{ nd }}">
+            {{ nd === "off" ? trans("config.labels.off") : trans("config.labels.minutes_before", {n: nd}) }}
+          </option>
+        </select>
+      </label>
+    </div>
+
+    <div class="text-center credits">
+      <p><strong>SimpleSchedule App</strong></p>
+      <p>by</p>
+      <p><strong>Piotr Kmiecik</strong></p>
+    </div>
+  </ion-content>
+</ion-view>

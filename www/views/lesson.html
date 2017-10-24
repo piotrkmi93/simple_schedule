@@ -1,0 +1,61 @@
+<ion-view title="{{ lesson.id !== undefined ? trans('navigation.edit_lesson') : trans('navigation.new_lesson') }}">
+  <ion-nav-buttons side="left">
+    <a ng-click="back()" class="nav-icon">
+      <i class="ion ion-ios-arrow-back"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <a ng-class="{'not-clickable': !valid(), 'clickable': valid()}" ng-click="save()" class="nav-icon">
+      <i class="ion ion-ios-checkmark-outline"></i>
+    </a>
+  </ion-nav-buttons>
+  <ion-content on-scroll="scroll()">
+    <h1 ng-style="titleSize" class="page-title">{{ lesson.id !== undefined ? trans('navigation.edit_lesson') : trans('navigation.new_lesson') }}</h1>
+    <div class="list">
+
+      <label class="item item-input">
+        <span class="input-label">{{ trans("lesson.name") }}</span>
+        <input type="text" ng-model="lesson.name">
+      </label>
+
+      <label class="item item-input item-select">
+        <div class="input-label">{{ trans("lesson.type") }}</div>
+        <select ng-model="lesson.type">
+          <option value="lecture">{{ trans("lesson.types.lecture") }}</option>
+          <option value="laboratories">{{ trans("lesson.types.laboratories") }}</option>
+          <option value="exercises">{{ trans("lesson.types.exercises") }}</option>
+        </select>
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">{{ trans("lesson.room") }}</span>
+        <input type="text" ng-model="lesson.room">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">{{ trans("lesson.leader") }}</span>
+        <input type="text" ng-model="lesson.leader">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">{{ trans("lesson.institute") }}</span>
+        <input type="text" ng-model="lesson.institute">
+      </label>
+
+      <label class="item item-input item-select">
+        <div class="input-label">{{ trans("lesson.start") }}</div>
+        <select ng-model="lesson.start">
+          <option ng-repeat="hour in availableStartHours" value="{{ hour }}">{{ prettyHour(hour) }}</option>
+        </select>
+      </label>
+
+      <label class="item item-input item-select">
+        <div class="input-label">{{ trans("lesson.end") }}</div>
+        <select ng-model="lesson.end">
+          <option ng-repeat="hour in availableEndHours" value="{{ hour }}">{{ prettyHour(hour) }}</option>
+        </select>
+      </label>
+
+    </div>
+  </ion-content>
+</ion-view>
