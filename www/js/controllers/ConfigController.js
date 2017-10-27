@@ -2,7 +2,7 @@
  * Created by Piotr Kmiecik on 11.10.2017.
  */
 angular.module("schedule")
-  .controller("ConfigController", function($scope, $rootScope, $window){
+  .controller("ConfigController", function($scope, $rootScope, $window, $ionicPopup){
 
     $scope.config = {
       locale: $rootScope.locale,
@@ -23,4 +23,21 @@ angular.module("schedule")
       $rootScope.notification_delay = $scope.config.notification_delay;
       localStorage.setItem("notification_delay", $scope.config.notification_delay);
     });
+
+    $scope.clear = function(){
+      $ionicPopup.show({
+        title: $scope.trans("config.deleteButton.message"),
+        subTitle: $scope.trans("config.deleteButton.sub_message"),
+        buttons: [
+          { text: $scope.trans("config.deleteButton.cancel") },
+          {
+            text: $scope.trans("config.deleteButton.confirm"),
+            type: "button-assertive",
+            onTap: function(){
+
+            }
+          }
+        ]
+      })
+    }
   });

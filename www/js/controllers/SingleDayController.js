@@ -36,7 +36,7 @@ angular.module("schedule")
 
     function setActive(){
       var now = new Date();
-      if(now.getDay() === getCurrentDayNumber())
+      if(now.getDay() === $scope.getCurrentDayNumber($scope.day.id))
       for(var i in $scope.day.lessons){
         $scope.day.lessons[i].active = Number($scope.day.lessons[i].start) <= now.getHours() &&
                                         Number($scope.day.lessons[i].end) > now.getHours();
@@ -48,22 +48,12 @@ angular.module("schedule")
       }
     }
 
-    function getCurrentDayNumber(){
-      switch($scope.day.id){
-        case "monday": return 1;
-        case "tuesday": return 2;
-        case "wednesday": return 3;
-        case "thursday": return 4;
-        case "friday": return 5;
-        case "saturday": return 6;
-        case "sunday": return 7;
-      }
-    }
-
     $rootScope.$on("reload_day", function(e, args){
       reload();
     });
 
     reload();
+
+
 
   });

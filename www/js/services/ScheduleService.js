@@ -2,7 +2,7 @@
  * Created by Piotr Kmiecik on 11.10.2017.
  */
 angular.module("schedule")
-  .factory("ScheduleService", function(){
+  .factory("ScheduleService", function(NotificationService){
 
     var LS = localStorage;
     const stdStartHours = ["7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"];
@@ -16,8 +16,12 @@ angular.module("schedule")
           if(!LS.hasOwnProperty("schedule"))
             reset();
           schedule = JSON.parse(LS.getItem("schedule"));
-          console.log(schedule);
+          NotificationService.init(schedule);
         }
+      },
+
+      getSchedule: function(){
+        return schedule
       },
 
       reload: function(){
@@ -70,8 +74,12 @@ angular.module("schedule")
               fixHours(lesson.day);
               sync();
             }
-
         }
+      },
+
+      clear: function(){
+        schedule = [];
+        sync();
       }
 
     };

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('schedule', ['ionic'])
 
-.run(function($ionicPlatform, $rootScope, ScheduleService) {
+.run(function($ionicPlatform, $rootScope, ScheduleService, NotificationService) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -22,19 +22,16 @@ angular.module('schedule', ['ionic'])
     }
   });
 
-  // Set locales
-  $rootScope.locales = ["en", "pl"];
-  // Check locale
+  $rootScope.locales = ["en", "pl"]; // locales available
   if(!localStorage.hasOwnProperty("locale"))
     localStorage.setItem("locale", "en");
   $rootScope.locale = localStorage.getItem("locale");
 
-  $rootScope.notificationDelays = ["off", "5", "10", "15"];
+  $rootScope.notificationDelays = ["off", "5", "10", "15"]; // delays available
   if(!localStorage.hasOwnProperty("notification_delay"))
     localStorage.setItem("notification_delay", "off");
   $rootScope.notification_delay = localStorage.getItem("notification_delay");
 
-  // Check schedule
   ScheduleService.init();
-
+  NotificationService.init();
 });

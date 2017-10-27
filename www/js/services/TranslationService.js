@@ -6,7 +6,7 @@ angular.module("schedule")
 
     var translations;
 
-    switch($rootScope.locale){
+    switch($rootScope.locale) {
 
       case "pl":
         translations = {
@@ -52,12 +52,22 @@ angular.module("schedule")
               locale: "Język",
               notifications: "Powiadomienia",
               minutes_before: "{n} minut przed",
-              off: "Disabled"
+              off: "Wyłączone",
+              clear: "Wyczyść dane"
             },
             locales: {
               pl: "Polski",
               en: "Angielski"
+            },
+            deleteButton: {
+              message: "Czy na pewno chcesz usunąć wszystkie zapisane zajęcia?",
+              sub_message: "Nie będziesz miał możliwości przywrócenia danych.",
+              cancel: "Anuluj",
+              confirm: "Wyczyść"
             }
+          },
+          notifications: {
+            message: "" // todo
           }
         };
         break;
@@ -108,15 +118,21 @@ angular.module("schedule")
               locale: "Language",
               notifications: "Notifications",
               minutes_before: "{n} minutes before",
-              off: "Wyłączone"
+              off: "Disabled",
+              clear: "Clear data"
             },
             locales: {
               pl: "Polish",
               en: "English"
+            },
+            deleteButton: {
+              message: "Are you sure you want to delete all saved activities?",
+              sub_message: "You will not be able to restore data.",
+              cancel: "Cancel",
+              confirm: "Clear"
             }
           }
         };
-
     }
 
     /**
