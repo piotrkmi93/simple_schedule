@@ -67,7 +67,8 @@ angular.module("schedule")
             }
           },
           notifications: {
-            message: "" // todo
+            title: "Kolejne zajęcia za {time} minut!",
+            text: "{name} w sali {room} prowadzi {leader}."
           }
         };
         break;
@@ -131,6 +132,10 @@ angular.module("schedule")
               cancel: "Cancel",
               confirm: "Clear"
             }
+          },
+          notifications: {
+            title: "Next class in {time} minutes!",
+            text: "{name} in room {room} leads {leader}."
           }
         };
     }

@@ -23,6 +23,7 @@ angular.module("schedule")
           closerDates = prepareCloserDates();
           cordova.plugins.notification.local.schedule({
             id: id(lesson),
+            title: title($rootScope.notification_delay),
             text: text(lesson),
             firstAt: new Date(
               closerDates[day].getFullYear(),
@@ -44,8 +45,8 @@ angular.module("schedule")
       updateAll: function(){
         for(var day in schedule)
           for(var lesson in schedule[day].lessons){
-            self.delete(schedule[day].lessons[lesson]);
-            self.create(schedule[day].lessons[lesson]);
+            self.update(schedule[day].lessons[lesson]);
+            // self.create(schedule[day].lessons[lesson]);
           }
       },
 
@@ -87,7 +88,15 @@ angular.module("schedule")
     }
 
     function text(lesson){
+      return trans("notifications.text", {
+        name: lesson.name,
+        room: lesson.room,
+        leader: lesson.leader
+      });
+    }
 
+    function title(time){
+      return trans("notifications.title", {time: time});
     }
 
     function valid(lesson){
