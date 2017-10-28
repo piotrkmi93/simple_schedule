@@ -20,10 +20,6 @@ angular.module("schedule")
         }
       },
 
-      getSchedule: function(){
-        return schedule
-      },
-
       reload: function(){
         schedule = undefined;
         self.init();
@@ -51,8 +47,8 @@ angular.module("schedule")
           lesson.id = schedule[lesson.day].lessons.length;
           schedule[lesson.day].lessons.push(lesson);
           fixHours(lesson.day);
-          NotificationService.create(lesson);
           sync();
+          NotificationService.create(lesson);
         }
       },
 
@@ -62,8 +58,8 @@ angular.module("schedule")
             if (lesson.id === schedule[lesson.day].lessons[i].id) {
               schedule[lesson.day].lessons[i] = lesson;
               fixHours(lesson.day);
-              NotificationService.update(lesson);
               sync();
+              NotificationService.update(lesson);
             }
         }
       },
@@ -74,16 +70,16 @@ angular.module("schedule")
             if(lesson.id === schedule[lesson.day].lessons[i].id){
               schedule[lesson.day].lessons.splice(i, 1);
               fixHours(lesson.day);
-              NotificationService.delete(lesson);
               sync();
+              NotificationService.delete(lesson);
             }
         }
       },
 
       clear: function(){
         schedule = [];
-        NotificationService.clear();
         sync();
+        NotificationService.clear();
       }
 
     };

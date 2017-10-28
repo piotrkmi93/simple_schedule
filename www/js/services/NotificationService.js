@@ -5,10 +5,6 @@
 angular.module("schedule")
   .factory("NotificationService", function($rootScope, trans){
 
-    // $cordovaLocalNotification
-
-    var LS = localStorage;
-    var notifications;
     var closerDates;
     var schedule;
 
@@ -19,19 +15,20 @@ angular.module("schedule")
       },
 
       create: function(lesson){
-        if(valid(lesson)) {
-          closerDates = prepareCloserDates();
+        if($rootScope.notification_delay !== "off" && valid(lesson)) {
+          prepareCloserDates();
+          var date = new Date(
+            closerDates[lesson.day].getFullYear(),
+            closerDates[lesson.day].getMonth(),
+            closerDates[lesson.day].getDate(),
+            Number(lesson.start) - 1,
+            60 - Number($rootScope.notification_delay)
+          );
           cordova.plugins.notification.local.schedule({
             id: id(lesson),
             title: title($rootScope.notification_delay),
             text: text(lesson),
-            firstAt: new Date(
-              closerDates[day].getFullYear(),
-              closerDates[day].getMonth(),
-              closerDates[day].getDate(),
-              Number(lesson.start) - 1,
-              60 - Number($rootScope.notification_delay)
-            ),
+            firstAt: date,
             every: "week"
           });
         }
@@ -46,7 +43,6 @@ angular.module("schedule")
         for(var day in schedule)
           for(var lesson in schedule[day].lessons){
             self.update(schedule[day].lessons[lesson]);
-            // self.create(schedule[day].lessons[lesson]);
           }
       },
 
@@ -80,7 +76,6 @@ angular.module("schedule")
           case 7: closerDates.sunday = tmp; break;
         }
       }
-      console.log(closerDates);
     }
 
     function id(lesson){

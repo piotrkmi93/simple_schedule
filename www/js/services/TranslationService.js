@@ -6,139 +6,142 @@ angular.module("schedule")
 
     var translations;
 
-    switch($rootScope.locale) {
+    $rootScope.$on("locale-ready", function(){
+      switch($rootScope.locale) {
 
-      case "pl":
-        translations = {
-          navigation: {
-            days: "Dni tygodnia",
-            config: "Ustawienia",
-            new_lesson: "Nowe zajęcie",
-            edit_lesson: "Edycja zajęcia"
-          },
-          days: {
-            monday: "Poniedziałek",
-            tuesday: "Wtorek",
-            wednesday: "Środa",
-            thursday: "Czwartek",
-            friday: "Piątek",
-            saturday: "Sobota",
-            sunday: "Niedziela"
-          },
-          messages: {
-            no_activities: "Brak zajęć"
-          },
-          lesson: {
-            name: "Nazwa",
-            type: "Typ",
-            room: "Sala",
-            leader: "Prowadzący",
-            institute: "Instytut",
-            start: "Rozpoczęcie",
-            end: "Zakończenie",
-            types: {
-              lecture: "Wykład",
-              laboratories: "Laboratoria",
-              exercises: "Ćwiczenia"
+        case "pl":
+          translations = {
+            navigation: {
+              days: "Dni tygodnia",
+              config: "Ustawienia",
+              new_lesson: "Nowe zajęcie",
+              edit_lesson: "Edycja zajęcia"
             },
-            deleteButton: {
-              message: "Czy na pewno chcesz usunąć \"{name}\"?",
-              cancel: "Anuluj",
-              confirm: "Usuń"
+            days: {
+              monday: "Poniedziałek",
+              tuesday: "Wtorek",
+              wednesday: "Środa",
+              thursday: "Czwartek",
+              friday: "Piątek",
+              saturday: "Sobota",
+              sunday: "Niedziela"
+            },
+            messages: {
+              no_activities: "Brak zajęć"
+            },
+            lesson: {
+              name: "Nazwa",
+              type: "Typ",
+              room: "Sala",
+              leader: "Prowadzący",
+              institute: "Instytut",
+              start: "Rozpoczęcie",
+              end: "Zakończenie",
+              types: {
+                lecture: "Wykład",
+                laboratories: "Laboratoria",
+                exercises: "Ćwiczenia"
+              },
+              deleteButton: {
+                message: "Czy na pewno chcesz usunąć \"{name}\"?",
+                cancel: "Anuluj",
+                confirm: "Usuń"
+              }
+            },
+            config: {
+              labels: {
+                locale: "Język",
+                notifications: "Powiadomienia",
+                minutes_before: "{n} minut przed",
+                off: "Wyłączone",
+                clear: "Wyczyść dane"
+              },
+              locales: {
+                pl: "Polski",
+                en: "Angielski"
+              },
+              deleteButton: {
+                message: "Czy na pewno chcesz usunąć wszystkie zapisane zajęcia?",
+                sub_message: "Nie będziesz miał możliwości przywrócenia danych.",
+                cancel: "Anuluj",
+                confirm: "Wyczyść"
+              }
+            },
+            notifications: {
+              title: "Kolejne zajęcia za {time} minut!",
+              text: "{name} w sali {room} prowadzi {leader}."
             }
-          },
-          config: {
-            labels: {
-              locale: "Język",
-              notifications: "Powiadomienia",
-              minutes_before: "{n} minut przed",
-              off: "Wyłączone",
-              clear: "Wyczyść dane"
-            },
-            locales: {
-              pl: "Polski",
-              en: "Angielski"
-            },
-            deleteButton: {
-              message: "Czy na pewno chcesz usunąć wszystkie zapisane zajęcia?",
-              sub_message: "Nie będziesz miał możliwości przywrócenia danych.",
-              cancel: "Anuluj",
-              confirm: "Wyczyść"
-            }
-          },
-          notifications: {
-            title: "Kolejne zajęcia za {time} minut!",
-            text: "{name} w sali {room} prowadzi {leader}."
-          }
-        };
-        break;
+          };
+          break;
 
-      // more locales available here
+        // more locales available here
 
-      default:
-        translations = {
-          navigation: {
-            days: "Days of week",
-            config: "Config",
-            new_lesson: "New lesson",
-            edit_lesson: "Edit lesson"
-          },
-          days: {
-            monday: "Monday",
-            tuesday: "Tuesday",
-            wednesday: "Wednesday",
-            thursday: "Thursday",
-            friday: "Friday",
-            saturday: "Saturday",
-            sunday: "Sunday"
-          },
-          messages: {
-            no_activities: "No activities"
-          },
-          lesson: {
-            name: "Name",
-            type: "Type",
-            room: "Room",
-            leader: "Leader",
-            institute: "Institute",
-            start: "Start",
-            end: "End",
-            types: {
-              lecture: "Lecture",
-              laboratories: "Laboratories",
-              exercises: "Exercises"
+        default:
+          translations = {
+            navigation: {
+              days: "Days of week",
+              config: "Config",
+              new_lesson: "New lesson",
+              edit_lesson: "Edit lesson"
             },
-            deleteButton: {
-              message: "Do you really want to delete \"{name}\"?",
-              cancel: "Cancel",
-              confirm: "Delete"
+            days: {
+              monday: "Monday",
+              tuesday: "Tuesday",
+              wednesday: "Wednesday",
+              thursday: "Thursday",
+              friday: "Friday",
+              saturday: "Saturday",
+              sunday: "Sunday"
+            },
+            messages: {
+              no_activities: "No activities"
+            },
+            lesson: {
+              name: "Name",
+              type: "Type",
+              room: "Room",
+              leader: "Leader",
+              institute: "Institute",
+              start: "Start",
+              end: "End",
+              types: {
+                lecture: "Lecture",
+                laboratories: "Laboratories",
+                exercises: "Exercises"
+              },
+              deleteButton: {
+                message: "Do you really want to delete \"{name}\"?",
+                cancel: "Cancel",
+                confirm: "Delete"
+              }
+            },
+            config: {
+              labels: {
+                locale: "Language",
+                notifications: "Notifications",
+                minutes_before: "{n} minutes before",
+                off: "Disabled",
+                clear: "Clear data"
+              },
+              locales: {
+                pl: "Polish",
+                en: "English"
+              },
+              deleteButton: {
+                message: "Are you sure you want to delete all saved activities?",
+                sub_message: "You will not be able to restore data.",
+                cancel: "Cancel",
+                confirm: "Clear"
+              }
+            },
+            notifications: {
+              title: "Next class in {time} minutes!",
+              text: "{name} in room {room} leads {leader}."
             }
-          },
-          config: {
-            labels: {
-              locale: "Language",
-              notifications: "Notifications",
-              minutes_before: "{n} minutes before",
-              off: "Disabled",
-              clear: "Clear data"
-            },
-            locales: {
-              pl: "Polish",
-              en: "English"
-            },
-            deleteButton: {
-              message: "Are you sure you want to delete all saved activities?",
-              sub_message: "You will not be able to restore data.",
-              cancel: "Cancel",
-              confirm: "Clear"
-            }
-          },
-          notifications: {
-            title: "Next class in {time} minutes!",
-            text: "{name} in room {room} leads {leader}."
-          }
-        };
-    }
+          };
+      }
+    });
+
 
     /**
      * This service works as a function,

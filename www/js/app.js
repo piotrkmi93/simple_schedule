@@ -16,6 +16,9 @@ angular.module('schedule', ['ionic'])
       // from snapping when text inputs are focused. Ionic handles this internally for
       // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
+
+      // Notification test
+      // cordova.plugins.notification.local.schedule({ message:"Hello World" });
     }
     if(window.StatusBar) {
       StatusBar.styleDefault();
@@ -32,6 +35,8 @@ angular.module('schedule', ['ionic'])
     localStorage.setItem("notification_delay", "off");
   $rootScope.notification_delay = localStorage.getItem("notification_delay");
 
+  $rootScope.$emit("locale-ready");
   ScheduleService.init();
   NotificationService.init();
+
 });
