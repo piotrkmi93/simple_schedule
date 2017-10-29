@@ -7,6 +7,8 @@ angular.module('schedule', ['ionic'])
 
 .run(function($ionicPlatform, $rootScope, ScheduleService, NotificationService) {
   $ionicPlatform.ready(function() {
+    $rootScope.isApp = !!window.cordova;
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

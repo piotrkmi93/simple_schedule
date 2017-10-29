@@ -15,7 +15,7 @@ angular.module("schedule")
       },
 
       create: function(lesson){
-        if($rootScope.notification_delay !== "off" && valid(lesson)) {
+        if($rootScope.isApp && $rootScope.notification_delay !== "off" && valid(lesson)) {
           prepareCloserDates();
           var date = new Date(
             closerDates[lesson.day].getFullYear(),
@@ -47,7 +47,7 @@ angular.module("schedule")
       },
 
       delete: function(lesson){
-        if(valid(lesson))
+        if($rootScope.isApp && valid(lesson))
           cordova.plugins.notification.local.cancel(id(lesson));
       },
 
