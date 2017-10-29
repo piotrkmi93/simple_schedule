@@ -24,7 +24,9 @@ angular.module("schedule")
     $scope.$watch(function(){ return $scope.config.notification_delay; }, function(n, o){
       $rootScope.notification_delay = $scope.config.notification_delay;
       localStorage.setItem("notification_delay", $scope.config.notification_delay);
-      NotificationService.updateAll();
+      if(o !== n) {
+        NotificationService.updateAll();
+      }
     });
 
     $scope.clear = function(){
