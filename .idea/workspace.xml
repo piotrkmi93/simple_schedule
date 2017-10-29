@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="1a8f7532-3ccc-461e-9bb5-d48ca3cfe019" name="Default" comment="" />
+=======
+    <list default="true" id="1a8f7532-3ccc-461e-9bb5-d48ca3cfe019" name="Default" comment="">
+<<<<<<< HEAD
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/icon.png" afterPath="$PROJECT_DIR$/resources/icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/splash.png" afterPath="$PROJECT_DIR$/resources/splash.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.xml" afterPath="$PROJECT_DIR$/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/app.js" afterPath="$PROJECT_DIR$/www/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/NotificationService.js" afterPath="$PROJECT_DIR$/www/js/services/NotificationService.js" />
+>>>>>>> d63a2316e047cf71b5498cbb402d8b9a74d9e24a
+    </list>
+>>>>>>> 17ca96b11b6105765289ccb478df2e98ffe22ae9
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -385,13 +403,29 @@
       <workItem from="1508868486550" duration="729000" />
       <workItem from="1509013027290" duration="5409000" />
       <workItem from="1509195582324" duration="8459000" />
+<<<<<<< HEAD
+      <workItem from="1509211782181" duration="244000" />
+=======
       <workItem from="1509211782181" duration="45000" />
+<<<<<<< HEAD
       <workItem from="1509288123322" duration="3380000" />
+=======
+      <workItem from="1509288123322" duration="1312000" />
+>>>>>>> d63a2316e047cf71b5498cbb402d8b9a74d9e24a
+>>>>>>> 17ca96b11b6105765289ccb478df2e98ffe22ae9
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="85875000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="82694000" />
+=======
+    <option name="totallyTimeSpent" value="83807000" />
+>>>>>>> d63a2316e047cf71b5498cbb402d8b9a74d9e24a
+>>>>>>> 17ca96b11b6105765289ccb478df2e98ffe22ae9
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />

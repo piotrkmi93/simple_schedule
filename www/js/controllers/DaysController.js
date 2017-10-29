@@ -18,9 +18,13 @@ angular.module("schedule")
         {id: "saturday", active: false, name: $scope.trans("days.saturday"), hours_from_to: ScheduleService.all("saturday.hours_from_to")},
         {id: "sunday", active: false, name: $scope.trans("days.sunday"), hours_from_to: ScheduleService.all("sunday.hours_from_to")}
       ];
-      for(var i in $scope.days){
-        if((Number(i)+1) === today.getDay())
-          $scope.days[i].active = true;
+      if(!today.getDay()){
+        $scope.days[6].active = true;
+      } else {
+        for(var i in $scope.days){
+          if((Number(i)+1) === today.getDay())
+            $scope.days[i].active = true;
+        }
       }
     }
 

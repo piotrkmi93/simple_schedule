@@ -37,8 +37,10 @@ angular.module('schedule', ['ionic'])
     localStorage.setItem("notification_delay", "off");
   $rootScope.notification_delay = localStorage.getItem("notification_delay");
 
+  if(!localStorage.hasOwnProperty("last_notification_id"))
+    localStorage.setItem("last_notification_id", 1);
+
   $rootScope.$emit("locale-ready");
   ScheduleService.init();
-  NotificationService.init();
 
 });

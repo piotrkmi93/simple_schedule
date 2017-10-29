@@ -2,7 +2,7 @@
  * Created by Piotr Kmiecik on 11.10.2017.
  */
 angular.module("schedule")
-  .factory("ScheduleService", function(NotificationService){
+  .factory("ScheduleService", function($rootScope, NotificationService){
 
     var LS = localStorage;
     const stdStartHours = ["7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"];
@@ -47,8 +47,8 @@ angular.module("schedule")
           lesson.id = schedule[lesson.day].lessons.length;
           schedule[lesson.day].lessons.push(lesson);
           fixHours(lesson.day);
-          sync();
           NotificationService.create(lesson);
+          sync();
         }
       },
 
@@ -58,8 +58,8 @@ angular.module("schedule")
             if (lesson.id === schedule[lesson.day].lessons[i].id) {
               schedule[lesson.day].lessons[i] = lesson;
               fixHours(lesson.day);
-              sync();
               NotificationService.update(lesson);
+              sync();
             }
         }
       },
@@ -70,16 +70,17 @@ angular.module("schedule")
             if(lesson.id === schedule[lesson.day].lessons[i].id){
               schedule[lesson.day].lessons.splice(i, 1);
               fixHours(lesson.day);
-              sync();
               NotificationService.delete(lesson);
+              sync();
             }
         }
       },
 
       clear: function(){
-        schedule = [];
-        sync();
+        schedule = undefined;
         NotificationService.clear();
+        self.init();
+        $rootScope.$emit("reload_day");
       }
 
     };

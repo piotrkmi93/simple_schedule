@@ -14,7 +14,7 @@ angular.module("schedule")
             type: "button-assertive",
             onTap: function(){
               ScheduleService.delete(lesson);
-              reload();
+              $rootScope.$emit("reload_day");
             }
           }
         ]
