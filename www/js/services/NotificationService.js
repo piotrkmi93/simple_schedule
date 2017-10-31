@@ -8,14 +8,16 @@ angular.module("schedule")
     var LS = localStorage;
     var closerDates;
     var schedule;
+    var sync;
 
     var self = {
 
-      init: function(s){
+      init: function(s, sy){
         schedule = s;
+        sync = sy;
       },
 
-      create: function(lesson){
+      create: function(lesson, updating){
         if($rootScope.isApp && $rootScope.notification_delay !== "off" && valid(lesson)) {
           prepareCloserDates();
           var id = Number(LS.getItem("last_notification_id"));
@@ -35,27 +37,37 @@ angular.module("schedule")
           });
           lesson.notification_id = id;
           LS.setItem("last_notification_id", id+1);
+          if(updating)
+            sync();
         }
       },
 
       update: function(lesson){
-        self.delete(lesson);
-        self.create(lesson);
+        self.delete(lesson, true);
       },
 
-      updateAll: function(){
+      updateAll: function(whenDone){
         for(var day in schedule)
           for(var lesson in schedule[day].lessons){
             self.update(schedule[day].lessons[lesson]);
           }
+        // if(whenDone)
+        //   whenDone();
       },
 
-      delete: function(lesson){
-        if($rootScope.isApp && valid(lesson) && typeof lesson.notification_id !== "undefined")
-          cordova.plugins.notification.local.isPresent(lesson.notification_id, function(isScheduled){
+      delete: function(lesson, updating){
+        if($rootScope.isApp && valid(lesson) && typeof lesson.notification_id !== "undefined") {
+          cordova.plugins.notification.local.isScheduled(lesson.notification_id, function (isScheduled) {
+            var t = JSON.stringify(lesson.notification_id);
             if(isScheduled)
-              cordova.plugins.notification.local.cancel(id(lesson));
+              cordova.plugins.notification.local.cancel(lesson.notification_id, function(){
+                alert("NOTIFICATION CANCELED for " + t);
+                if(updating){
+                  self.create(lesson, updating);
+                }
+              });
           });
+        }
       },
 
       clear: function(){

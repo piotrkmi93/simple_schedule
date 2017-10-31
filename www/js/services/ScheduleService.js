@@ -16,7 +16,7 @@ angular.module("schedule")
           if(!LS.hasOwnProperty("schedule"))
             reset();
           schedule = JSON.parse(LS.getItem("schedule"));
-          NotificationService.init(schedule);
+          NotificationService.init(schedule, sync);
         }
       },
 
@@ -60,6 +60,7 @@ angular.module("schedule")
               fixHours(lesson.day);
               NotificationService.update(lesson);
               sync();
+              break;
             }
         }
       },
@@ -72,6 +73,7 @@ angular.module("schedule")
               fixHours(lesson.day);
               NotificationService.delete(lesson);
               sync();
+              break;
             }
         }
       },

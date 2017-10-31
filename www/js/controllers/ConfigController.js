@@ -16,8 +16,10 @@ angular.module("schedule")
       $rootScope.locale = $scope.config.locale;
       localStorage.setItem("locale", $scope.config.locale);
       if(o !== n){
-        NotificationService.updateAll();
-        $window.location.reload(true);
+        NotificationService.updateAll(function(){
+          $window.location.reload(true);
+        });
+
       }
     });
 
