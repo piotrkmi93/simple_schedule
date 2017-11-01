@@ -36,6 +36,7 @@ angular.module("schedule")
       localStorage.setItem("locale", $scope.config.locale);
       if(o !== n){
         $rootScope.$emit("locale-ready");
+        $rootScope.$emit("reload_day");
         $timeout(function(){
           NotificationService.updateAll();
         }, 1000);
