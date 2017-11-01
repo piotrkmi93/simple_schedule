@@ -158,3 +158,17 @@ a.nav-icon.clickable{
 .green{
   color: #33cd5f !important;
 }
+
+.loading {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0, .8);
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 50px;
+}

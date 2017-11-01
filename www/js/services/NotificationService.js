@@ -3,7 +3,7 @@
  */
 
 angular.module("schedule")
-  .factory("NotificationService", function($rootScope, trans){
+  .factory("NotificationService", function($rootScope, $q, trans){
 
     var LS = localStorage;
     var closerDates;
@@ -30,7 +30,7 @@ angular.module("schedule")
           );
           cordova.plugins.notification.local.schedule({
             id: id,
-            title: title($rootScope.notification_delay),
+            title: title(lesson.type, $rootScope.notification_delay),
             text: text(lesson),
             firstAt: date,
             every: "week"
@@ -39,6 +39,7 @@ angular.module("schedule")
           LS.setItem("last_notification_id", id+1);
           if(updating)
             sync();
+          // alert("NOTIFICATION CREATED " + id);
         }
       },
 
@@ -46,27 +47,36 @@ angular.module("schedule")
         self.delete(lesson, true);
       },
 
-      updateAll: function(whenDone){
-        for(var day in schedule)
-          for(var lesson in schedule[day].lessons){
+      updateAll: function(){
+        for(var day in schedule) {
+          for (var lesson in schedule[day].lessons) {
             self.update(schedule[day].lessons[lesson]);
           }
-        // if(whenDone)
-        //   whenDone();
+        }
+
       },
 
       delete: function(lesson, updating){
-        if($rootScope.isApp && valid(lesson) && typeof lesson.notification_id !== "undefined") {
-          cordova.plugins.notification.local.isScheduled(lesson.notification_id, function (isScheduled) {
-            var t = JSON.stringify(lesson.notification_id);
-            if(isScheduled)
-              cordova.plugins.notification.local.cancel(lesson.notification_id, function(){
-                alert("NOTIFICATION CANCELED for " + t);
-                if(updating){
+        if($rootScope.isApp && valid(lesson)) {
+          if(typeof lesson.notification_id !== "undefined") {
+            cordova.plugins.notification.local.isScheduled(lesson.notification_id, function (isScheduled) {
+              var t = JSON.stringify(lesson.notification_id);
+              if (isScheduled) {
+                cordova.plugins.notification.local.cancel(lesson.notification_id, function () {
+                  // alert("NOTIFICATION CANCELED for " + t);
+                  if (updating) {
+                    self.create(lesson, updating);
+                  }
+                });
+              } else {
+                if (updating)
                   self.create(lesson, updating);
-                }
-              });
-          });
+              }
+            });
+          } else {
+            if (updating)
+              self.create(lesson, updating);
+          }
         }
       },
 
@@ -105,8 +115,8 @@ angular.module("schedule")
       });
     }
 
-    function title(time){
-      return trans("notifications.title", {time: time});
+    function title(type, time){
+      return trans("notifications.title", {type: trans("lesson.types."+type), time: time});
     }
 
     function valid(lesson){

@@ -5,8 +5,15 @@
 angular.module("schedule")
   .controller("DaysController", function ($scope, $rootScope, ScheduleService) {
 
+    /**
+     * Init
+     */
     setDays();
 
+    /**
+     * Init function, set all of days and check which is active (today is this day).
+     * Also checks in what hours lessons are in this day.
+     */
     function setDays(){
       var today = new Date();
       $scope.days = [
@@ -28,6 +35,9 @@ angular.module("schedule")
       }
     }
 
+    /**
+     * Init again when reload appears.
+     */
     $rootScope.$on("reload_day", function(e, args){
       setDays();
     });
