@@ -43,4 +43,5 @@ angular.module('schedule', ['ionic'])
   $rootScope.$emit("locale-ready");
   ScheduleService.init();
 
+
 });

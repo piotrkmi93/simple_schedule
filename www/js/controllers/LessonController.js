@@ -4,9 +4,15 @@
 angular.module("schedule")
   .controller("LessonController", function($scope, $rootScope, $timeout, $stateParams, ScheduleService){
 
-
+    /**
+     * Init
+     */
     init();
 
+    /**
+     * Init function.
+     * Creates empty lesson.
+     */
     function init(){
       $scope.backup = undefined;
       var day = $scope.clone(ScheduleService.all($stateParams.day));
@@ -29,6 +35,10 @@ angular.module("schedule")
       }
     }
 
+    /**
+     * Watcher on start hour.
+     * If it's higher than end hour, end hour will be incremented while it's higher.
+     */
     $scope.$watch(function(){return $scope.lesson.start}, function(){
       var i = 0;
       if(!checkRange()){
@@ -39,6 +49,10 @@ angular.module("schedule")
       }
     });
 
+    /**
+     * Watcher on end hour.
+     * If it's lower than start hour, start hour will be decremented while it's lower.
+     */
     $scope.$watch(function(){return $scope.lesson.end}, function(){
       var i = $scope.availableStartHours.length - 1;
       if(!checkRange()){
@@ -91,6 +105,9 @@ angular.module("schedule")
       $scope.availableEndHours.sort(sort);
     }
 
+    /**
+     * Back to the day view
+     */
     $scope.back = function(){
       $rootScope.$emit("reload_day");
       $scope.route('day', {day: $scope.lesson.day});

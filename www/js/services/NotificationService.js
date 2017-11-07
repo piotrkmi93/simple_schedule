@@ -3,19 +3,21 @@
  */
 
 angular.module("schedule")
-  .factory("NotificationService", function($rootScope, trans){
+  .factory("NotificationService", function($rootScope, $q, trans){
 
     var LS = localStorage;
     var closerDates;
     var schedule;
+    var sync;
 
     var self = {
 
-      init: function(s){
+      init: function(s, sy){
         schedule = s;
+        sync = sy;
       },
 
-      create: function(lesson){
+      create: function(lesson, updating){
         if($rootScope.isApp && $rootScope.notification_delay !== "off" && valid(lesson)) {
           prepareCloserDates();
           var id = Number(LS.getItem("last_notification_id"));
@@ -28,34 +30,54 @@ angular.module("schedule")
           );
           cordova.plugins.notification.local.schedule({
             id: id,
-            title: title($rootScope.notification_delay),
+            title: title(lesson.type, $rootScope.notification_delay),
             text: text(lesson),
             firstAt: date,
             every: "week"
           });
           lesson.notification_id = id;
           LS.setItem("last_notification_id", id+1);
+          if(updating)
+            sync();
+          // alert("NOTIFICATION CREATED " + id);
         }
       },
 
       update: function(lesson){
-        self.delete(lesson);
-        self.create(lesson);
+        self.delete(lesson, true);
       },
 
       updateAll: function(){
-        for(var day in schedule)
-          for(var lesson in schedule[day].lessons){
+        for(var day in schedule) {
+          for (var lesson in schedule[day].lessons) {
             self.update(schedule[day].lessons[lesson]);
           }
+        }
+
       },
 
-      delete: function(lesson){
-        if($rootScope.isApp && valid(lesson) && typeof lesson.notification_id !== "undefined")
-          cordova.plugins.notification.local.isPresent(lesson.notification_id, function(isScheduled){
-            if(isScheduled)
-              cordova.plugins.notification.local.cancel(id(lesson));
-          });
+      delete: function(lesson, updating){
+        if($rootScope.isApp && valid(lesson)) {
+          if(typeof lesson.notification_id !== "undefined") {
+            cordova.plugins.notification.local.isScheduled(lesson.notification_id, function (isScheduled) {
+              var t = JSON.stringify(lesson.notification_id);
+              if (isScheduled) {
+                cordova.plugins.notification.local.cancel(lesson.notification_id, function () {
+                  // alert("NOTIFICATION CANCELED for " + t);
+                  if (updating) {
+                    self.create(lesson, updating);
+                  }
+                });
+              } else {
+                if (updating)
+                  self.create(lesson, updating);
+              }
+            });
+          } else {
+            if (updating)
+              self.create(lesson, updating);
+          }
+        }
       },
 
       clear: function(){
@@ -93,8 +115,8 @@ angular.module("schedule")
       });
     }
 
-    function title(time){
-      return trans("notifications.title", {time: time});
+    function title(type, time){
+      return trans("notifications.title", {type: trans("lesson.types."+type), time: time});
     }
 
     function valid(lesson){

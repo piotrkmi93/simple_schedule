@@ -67,7 +67,7 @@ angular.module("schedule")
               }
             },
             notifications: {
-              title: "Kolejne zajęcia za {time} minut!",
+              title: "{type} za {time} minut!",
               text: "{name} w sali {room} prowadzi {leader}."
             }
           };
@@ -131,7 +131,7 @@ angular.module("schedule")
               }
             },
             notifications: {
-              title: "Next class in {time} minutes!",
+              title: "{type} in {time} minutes!",
               text: "{name} in room {room} leads {leader}."
             }
           };
@@ -148,6 +148,7 @@ angular.module("schedule")
      * To achieve this, function builds custom RegExp.
      */
     return function(path, variables){
+      // console.log("TRANS");
       var parts = path.split(".");
       var result = find(translations, 0, parts);
       if(typeof result !== "undefined" && typeof variables !== "undefined")

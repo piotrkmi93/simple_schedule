@@ -80,6 +80,6 @@ angular.module("schedule")
         case "saturday": return 6;
         case "sunday": return 7;
       }
-    }
+    };
 
   });
