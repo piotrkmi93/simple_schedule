@@ -10,7 +10,6 @@ angular.module("schedule")
     var schedule;
 
     var self = {
-
       init: function(){
         if(typeof schedule === "undefined") {
           if(!LS.hasOwnProperty("schedule"))
@@ -19,12 +18,10 @@ angular.module("schedule")
           NotificationService.init(schedule);
         }
       },
-
       reload: function(){
         schedule = undefined;
         self.init();
       },
-
       all: function(path, sort){
         var parts = path.split(".");
         var result = find(schedule, 0, parts);
@@ -32,7 +29,6 @@ angular.module("schedule")
           return Number(a.start) - Number(b.start);
         }) : result;
       },
-
       get: function(day, id){
         if(typeof day !== "undefined" && schedule.hasOwnProperty(day)){
           for(var i in schedule[day].lessons) {
@@ -41,7 +37,6 @@ angular.module("schedule")
           }
         } else return undefined;
       },
-
       create: function(lesson){
         if(typeof lesson !== "undefined" && typeof lesson.day !== "undefined" && schedule.hasOwnProperty(lesson.day)){
           lesson.id = schedule[lesson.day].lessons.length;
@@ -51,7 +46,6 @@ angular.module("schedule")
           sync();
         }
       },
-
       update: function(lesson){
         if(typeof lesson !== "undefined" && typeof lesson.day !== "undefined" && schedule.hasOwnProperty(lesson.day)) {
           for (var i in schedule[lesson.day].lessons)
@@ -63,7 +57,6 @@ angular.module("schedule")
             }
         }
       },
-
       delete: function(lesson){
         if(typeof lesson !== "undefined" && typeof lesson.day !== "undefined" && schedule.hasOwnProperty(lesson.day)){
           for(var i in schedule[lesson.day].lessons)
@@ -75,14 +68,12 @@ angular.module("schedule")
             }
         }
       },
-
       clear: function(){
         schedule = undefined;
         NotificationService.clear();
         self.init();
         $rootScope.$emit("reload_day");
       }
-
     };
 
     function fixHours(day){

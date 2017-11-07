@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('schedule', ['ionic'])
 
-.run(function($ionicPlatform, $rootScope, ScheduleService, NotificationService) {
+.run(function($ionicPlatform, $rootScope, ScheduleService) {
   $ionicPlatform.ready(function() {
     $rootScope.isApp = !!window.cordova;
 

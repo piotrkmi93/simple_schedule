@@ -8,7 +8,6 @@ angular.module("schedule")
 
     $rootScope.$on("locale-ready", function(){
       switch($rootScope.locale) {
-
         case "pl":
           translations = {
             navigation: {
@@ -73,9 +72,6 @@ angular.module("schedule")
             }
           };
           break;
-
-        // more locales available here
-
         default:
           translations = {
             navigation: {
